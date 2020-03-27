@@ -2,7 +2,7 @@
  * @Author: huyanhai
  * @since: 2020-03-26 21:41:02
  * @LastAuthor: huyanhai
- * @lastTime: 2020-03-27 22:16:13
+ * @lastTime: 2020-03-27 23:44:11
  * @FilePath: \open\index.html
  * @Description: 
  -->
@@ -13,11 +13,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./plugin/element/index.css">
+    <link rel="stylesheet" href="./css/page.min.css">
 </head>
 
 <body>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <div id="app" class="pages">
+        <el-container>
+            <!--header begin-->
+            <el-header height="65px" class="page__header">
+                <el-row class="header__row">
+                    <el-col :span="12" class="header__col--left">
+                        <div class="grid-content bg-purple">
+                            <img src="./imges/logo.png" class="header__logo--img" />
+                            <p class="header__logo--text">沥青混合料智慧生产管控系统</p>
+                        </div>
+                    </el-col>
+                    <el-col :span="12" class="header__col--right">
+                        <div class="grid-content bg-purple-light">
+                            <el-button :class="active === 1 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(1)">生产调度</el-button>
+                            <el-button :class="active === 2 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(2)">生产监控</el-button>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-header>
+            <!--header end-->
+            <el-main>
+                <el-row class="main__data">
+                    <el-col :span="6" class="data__number--asphalt">
+                        <div class="grid-content data__item--box">
+                            <div class="data__img">
+                                <img src="./imges/jbz.png" class="img" />
+                            </div>
+                            <div class="data__contant">
+                                <div class="box">
+                                    <b class="data__number">冷拌沥青-13</b>
+                                    <p class="data__text">生产类型</p>
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                    <el-col :span="10" class="data__number--temperature">
+                        <div class="grid-content data__item--box">
+                            <div class="data__img">
+                                <img src="./imges/wd.png" class="img" />
+                            </div>
+                            <div class="data__contant">
+                                <div class="box">
+                                    <b class="data__number">68.1</b>
+                                    <p class="data__text">生产类型</p>
+                                </div>
+                                <div class="box">
+                                    <b class="data__number">24</b>
+                                    <p class="data__text">出料温度</p>
+                                </div>
+                                <div class="box">
+                                    <b class="data__number">40.5</b>
+                                    <p class="data__text">尾气温度</p>
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                    <el-col :span="8" class="data__number--weight">
+                        <div class="grid-content data__item--box">
+                            <div class="data__img">
+                                <img src="./imges/xz.png" class="img" />
+                            </div>
+                            <div class="data__contant">
+                                <div class="box">
+                                    <b class="data__number">冷拌沥青-13</b>
+                                    <p class="data__text">生产类型</p>
+                                </div>
+                            </div>
+                        </div>
+                    </el-col>
+                </el-row>
+            </el-main>
+        </el-container>
+    </div>
+    <script src="./plugin/vue.js"></script>
+    <script src="./plugin/axios.min.js"></script>
+    <script src="./plugin/element/index.js"></script>
+    <script src="./js/init.js"></script>
 </body>
 
 </html>

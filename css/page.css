@@ -1,0 +1,157 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+body {
+  background: #F4F6FA;
+}
+
+html,
+body,
+.pages {
+  width: 100%;
+  height: 100%;
+  max-width: 1920px;
+  min-width: 1024px;
+}
+
+.page__header {
+  background: #4B4D61;
+}
+
+.page__header .header__row {
+  height: 100%;
+}
+
+.page__header .header__col--left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.page__header .header__col--left > div {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.page__header .header__col--left .header__logo--img {
+  height: 49px;
+}
+
+.page__header .header__col--left .header__logo--text {
+  height: 24px;
+  line-height: 24px;
+  font-size: 18px;
+  color: #FFFFFF;
+  display: block;
+  border-left: 1px solid #FFFFFF;
+  margin-left: 15px;
+  padding-left: 15px;
+}
+
+.page__header .header__col--right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.page__header .header__btn {
+  height: 38px;
+  width: 120px;
+  padding: 0;
+  font-size: 18px;
+  color: #FFFFFF;
+  background: none;
+  border: none;
+}
+
+.page__header .header__btn.header__btn--active {
+  background: #1AB99B;
+  border-color: #1AB99B;
+}
+
+.main__data .data__number--asphalt,
+.main__data .data__number--temperature,
+.main__data .data__number--weight {
+  padding-right: 20px;
+}
+
+.main__data .data__number--asphalt .data__item--box,
+.main__data .data__number--temperature .data__item--box,
+.main__data .data__number--weight .data__item--box {
+  height: 110px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.main__data .data__number--asphalt .data__item--box .data__img,
+.main__data .data__number--temperature .data__item--box .data__img,
+.main__data .data__number--weight .data__item--box .data__img {
+  position: absolute;
+  width: 64px;
+  height: 86px;
+  background: rgba(92, 123, 229, 0.3);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__data .data__number--asphalt .data__item--box .data__contant,
+.main__data .data__number--temperature .data__item--box .data__contant,
+.main__data .data__number--weight .data__item--box .data__contant {
+  padding-left: 100px;
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 100px);
+}
+
+.main__data .data__number--asphalt .data__item--box .data__contant .box,
+.main__data .data__number--temperature .data__item--box .data__contant .box,
+.main__data .data__number--weight .data__item--box .data__contant .box {
+  flex: 1 0 auto;
+  width: 30%;
+}
+
+.main__data .data__number--asphalt .data__item--box .data__contant .box .data__number,
+.main__data .data__number--temperature .data__item--box .data__contant .box .data__number,
+.main__data .data__number--weight .data__item--box .data__contant .box .data__number {
+  font-size: 20px;
+  color: #262626;
+}
+
+.main__data .data__number--asphalt .data__item--box .data__contant .box .data__text,
+.main__data .data__number--temperature .data__item--box .data__contant .box .data__text,
+.main__data .data__number--weight .data__item--box .data__contant .box .data__text {
+  font-size: 15px;
+  color: rgba(33, 33, 33, 0.5);
+  margin-top: 8px;
+}
+
+.main__data .data__number--temperature .data__item--box .data__img {
+  background: #FFDCDC;
+}
+
+.main__data .data__number--temperature .data__item--box .data__contant .data__number {
+  font-size: 28px !important;
+  color: #FF0303 !important;
+}
+
+.main__data .data__number--weight {
+  padding-right: 0;
+}
+
+.main__data .data__number--weight .data__item--box .data__img {
+  background: #E5F2FF;
+}
