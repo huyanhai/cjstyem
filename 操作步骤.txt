@@ -1,0 +1,2 @@
+1、用编辑器打开openBrowser.bat文件，设置浏览器的路径
+2、运行copyFille.bat

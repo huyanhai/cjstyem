@@ -1,0 +1,1 @@
+copy C:\Users\Administrator\Desktop\open\openBrowser.bat "C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup"
