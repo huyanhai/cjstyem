@@ -2,99 +2,440 @@
  * @Author: huyanhai
  * @since: 2020-03-26 21:41:02
  * @LastAuthor: huyanhai
- * @lastTime: 2020-03-27 23:44:11
- * @FilePath: \open\index.html
+ * @lastTime: 2020-04-10 21:00:25
+ * @FilePath: /cjstyem/index.html
  * @Description: 
  -->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./plugin/element/index.css">
-    <link rel="stylesheet" href="./css/page.min.css">
-</head>
+    <link rel="stylesheet" href="./plugin/element/index.css" />
+    <link rel="stylesheet" href="./css/page.min.css" />
+  </head>
 
-<body>
+  <body>
     <div id="app" class="pages">
-        <el-container>
-            <!--header begin-->
-            <el-header height="65px" class="page__header">
-                <el-row class="header__row">
-                    <el-col :span="12" class="header__col--left">
-                        <div class="grid-content bg-purple">
-                            <img src="./imges/logo.png" class="header__logo--img" />
-                            <p class="header__logo--text">沥青混合料智慧生产管控系统</p>
-                        </div>
-                    </el-col>
-                    <el-col :span="12" class="header__col--right">
-                        <div class="grid-content bg-purple-light">
-                            <el-button :class="active === 1 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(1)">生产调度</el-button>
-                            <el-button :class="active === 2 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(2)">生产监控</el-button>
-                        </div>
-                    </el-col>
-                </el-row>
-            </el-header>
-            <!--header end-->
-            <el-main>
-                <el-row class="main__data">
-                    <el-col :span="6" class="data__number--asphalt">
-                        <div class="grid-content data__item--box">
-                            <div class="data__img">
-                                <img src="./imges/jbz.png" class="img" />
-                            </div>
-                            <div class="data__contant">
-                                <div class="box">
-                                    <b class="data__number">冷拌沥青-13</b>
-                                    <p class="data__text">生产类型</p>
-                                </div>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="10" class="data__number--temperature">
-                        <div class="grid-content data__item--box">
-                            <div class="data__img">
-                                <img src="./imges/wd.png" class="img" />
-                            </div>
-                            <div class="data__contant">
-                                <div class="box">
-                                    <b class="data__number">68.1</b>
-                                    <p class="data__text">生产类型</p>
-                                </div>
-                                <div class="box">
-                                    <b class="data__number">24</b>
-                                    <p class="data__text">出料温度</p>
-                                </div>
-                                <div class="box">
-                                    <b class="data__number">40.5</b>
-                                    <p class="data__text">尾气温度</p>
-                                </div>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :span="8" class="data__number--weight">
-                        <div class="grid-content data__item--box">
-                            <div class="data__img">
-                                <img src="./imges/xz.png" class="img" />
-                            </div>
-                            <div class="data__contant">
-                                <div class="box">
-                                    <b class="data__number">冷拌沥青-13</b>
-                                    <p class="data__text">生产类型</p>
-                                </div>
-                            </div>
-                        </div>
-                    </el-col>
-                </el-row>
-            </el-main>
-        </el-container>
+      <el-container>
+        <!--header begin-->
+        <el-header height="65px" class="page__header">
+          <el-row class="header__row">
+            <el-col :span="12" class="header__col--left">
+              <div class="grid-content bg-purple">
+                <img src="./imges/logo.png" class="header__logo--img" />
+                <p class="header__logo--text">沥青混合料智慧生产管控系统</p>
+              </div>
+            </el-col>
+            <el-col :span="12" class="header__col--right">
+              <div class="grid-content bg-purple-light">
+                <el-button :class="active === 1 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(1)">生产调度</el-button>
+                <el-button :class="active === 2 ? 'header__btn--active' : ''" class="header__btn" @click="changeMode(2)">生产监控</el-button>
+              </div>
+            </el-col>
+          </el-row>
+        </el-header>
+        <!--header end-->
+        <el-main v-show="active === 2">
+          <el-row class="main__data">
+            <el-col :span="6" class="data__number--asphalt">
+              <div class="grid-content data__item--box">
+                <div class="data__img">
+                  <img src="./imges/jbz.png" class="img" />
+                </div>
+                <div class="data__contant">
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.productName || '--'}}</b>
+                    <p class="data__text">生产类型</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="10" class="data__number--temperature">
+              <div class="grid-content data__item--box">
+                <div class="data__img">
+                  <img src="./imges/wd.png" class="img" />
+                </div>
+                <div class="data__contant">
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.guliaoTemp || '--'}}℃</b>
+                    <p class="data__text">骨料温度</p>
+                  </div>
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.outTemp || '--'}}℃</b>
+                    <p class="data__text">出料温度</p>
+                  </div>
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.weiqiTemp || '--'}}℃</b>
+                    <p class="data__text">尾气温度</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8" class="data__number--weight">
+              <div class="grid-content data__item--box">
+                <div class="data__img">
+                  <img src="./imges/xz.png" class="img" />
+                </div>
+                <div class="data__contant">
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.productTotal || '--'}}</b>
+                    <p class="data__text">总产量(吨)</p>
+                  </div>
+                  <div class="box">
+                    <b class="data__number">{{shengchanData.curTotal || '--'}}</b>
+                    <p class="data__text">当前产量(吨)</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="main__ile">
+            <el-col :span="6" class="ile__box">
+              <div class="grid-content ile__contaner">
+                <div class="box">
+                  <img src="./imges/shiyou.png" class="img" />
+                  <div class="data">
+                    <b class="number">{{shengchanData.ysb || '--'}}%</b>
+                    <p class="text">石油比</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="18" class="ile__table">
+              <div class="grid-content ile__contaner">
+                <div class="title">设计配比</div>
+                <el-table :data="shengchanData.ileData" max-height="100px">
+                  <el-table-column min-width="60" fixed prop="one_S" label="仓1" align="center"></el-table-column>
+                  <el-table-column min-width="60" prop="two_S" label="仓2" align="center"></el-table-column>
+                  <el-table-column width="60" prop="three_S" label="仓3" align="center"></el-table-column>
+                  <el-table-column width="60" prop="four_S" label="仓4" align="center"></el-table-column>
+                  <el-table-column width="60" prop="five_S" label="仓5" align="center"></el-table-column>
+                  <el-table-column width="60" prop="six_1_S" label="仓6" align="center"></el-table-column>
+                  <el-table-column width="60" prop="seven_1_S" label="仓7" align="center"></el-table-column>
+                  <el-table-column width="60" prop="six_S" label="新粉" align="center"></el-table-column>
+                  <el-table-column width="60" prop="seven_S" label="新粉2" align="center"></el-table-column>
+                  <el-table-column width="60" prop="huiShou_S" label="回收料" align="center"></el-table-column>
+                  <el-table-column width="60" prop="eight" label="沥青" align="center"></el-table-column>
+                </el-table>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="production__data">
+            <el-col :span="24">
+              <div class="title">生产看板</div>
+              <el-table :data="shengchanData.productList" height="350">
+                <el-table-column fixed label="时间" min-width="80" align="center" :show-overflow-tooltip="true">
+                  <template slot-scope="scope">
+                    {{scope.row.dateTime}}
+                  </template>
+                </el-table-column>
+                <el-table-column min-width="80" prop="guanci" label="锅次" align="center"></el-table-column>
+                <el-table-column width="60" prop="one" label="仓1" align="center"></el-table-column>
+                <el-table-column width="60" prop="two" label="仓2" align="center"></el-table-column>
+                <el-table-column width="60" prop="three" label="仓3" align="center"></el-table-column>
+                <el-table-column width="60" prop="four" label="仓4" align="center"></el-table-column>
+                <el-table-column width="60" prop="five" label="仓5" align="center"></el-table-column>
+                <el-table-column width="60" prop="six_1" label="仓6" align="center"></el-table-column>
+                <el-table-column width="60" prop="seven_1" label="仓7" align="center"></el-table-column>
+                <el-table-column width="60" prop="six" label="新粉" align="center"></el-table-column>
+                <el-table-column width="60" prop="seven" label="新粉2" min- align="center"></el-table-column>
+                <el-table-column width="60" prop="huiShou" label="回收料" align="center"></el-table-column>
+                <el-table-column width="60" prop="eight" label="沥青" align="center"></el-table-column>
+                <el-table-column width="60" prop="ysb" label="油石比" align="center"></el-table-column>
+              </el-table>
+            </el-col>
+          </el-row>
+          <el-row class="data__lines">
+            <el-col :span="8">
+              <div class="grid-content">
+                <div class="title">油石比（%）</div>
+                <div class="line" id="line1"></div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content">
+                <div class="title">温度（%）</div>
+                <div class="line" id="line2"></div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content">
+                <div class="title">仓1配比（%）</div>
+                <div class="line" id="line3"></div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-main>
+        <el-main v-show="active === 1">
+          <el-row class="diaodu__data">
+            <el-col :span="6">
+              <div class="grid-content">
+                <div class="box">
+                  <img src="./imges/renwu.png" class="img" />
+                  <div class="data">
+                    <p class="text">任务单数</p>
+                    <p class="number">{{diaoduData.task_count || '--'}}</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content">
+                <div class="box">
+                  <img src="./imges/jihua.png" class="img" />
+                  <div class="data">
+                    <p class="text">总计划量</p>
+                    <p class="number">{{diaoduData.plan_count || '--'}}</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content">
+                <div class="box">
+                  <img src="./imges/cangku.png" class="img" />
+                  <div class="data">
+                    <p class="text">总发货量</p>
+                    <p class="number">{{diaoduData.ship_count || '--'}}</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="6">
+              <div class="grid-content">
+                <div class="box">
+                  <img src="./imges/huoche.png" class="img" />
+                  <div class="data">
+                    <p class="text">总发车次数</p>
+                    <p class="number">{{diaoduData.start_count || '--'}}</p>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="table__option">
+            <el-col :span="10">
+              <el-date-picker class="picker" v-model="times" value-format="yyyy-MM-DD" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"> </el-date-picker>
+            </el-col>
+            <el-col :span="4">
+              <el-input v-model="keyWords" placeholder="请输入内容"></el-input>
+            </el-col>
+            <el-col :span="10">
+              <el-button type="success" round @click="searchData">搜索</el-button>
+              <el-button type="primary" round @click="showDialog">待供任务单列表</el-button>
+            </el-col>
+          </el-row>
+          <el-row class="table-more">
+            <el-col :span="16">
+              <div class="grid-content col-left">
+                <div class="table__list" v-for="(item,index) in diaoduData.dispatchList" @click="showDispatch(item.task_no)">
+                  <div class="title">
+                    <p class="num">{{item.task_no}}</p>
+                    <p class="text">
+                      【序号：{{index + 1 < 10 ? '0'+(index +1) : index+1}}】
+                    </p>
+                  </div>
+                  <div class="content">
+                    <div class="item">
+                      <p class="name">工程名称：</p>
+                      <p class="text">{{item.engineer_name}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">施工部位：</p>
+                      <p class="text">{{item.site_name}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">砼类型：</p>
+                      <p class="text red">{{item.concrete_name}}</p>
+                    </div>
+                    <div class="item item-2">
+                      <p class="name">运输方式：</p>
+                      <p class="text yellow">{{item.transport_way}}</p>
+                    </div>
+                    <div class="item item-2">
+                      <p class="name">出厂温度：</p>
+                      <p class="text green">{{item.temperature}}</p>
+                    </div>
+                    <div class="item item-2">
+                      <p class="name">已发量：</p>
+                      <p class="text blue">{{item.deliver_amount}}</p>
+                    </div>
+                    <div class="item item-2">
+                      <p class="name">计划量：</p>
+                      <p class="text red">{{item.plan_amount}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="8">
+              <div class="grid-content col-right">
+                <div class="task__info">
+                  <div class="title">任务单明细信息</div>
+                  <div class="content" v-for="(item,index) in diaoduData.dispatchList">
+                    <div class="item">
+                      <p class="name">合同编号：</p>
+                      <p class="text">{{item.project_no}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">工程名称：</p>
+                      <p class="text">{{item.engineer_name}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">施工单位：</p>
+                      <p class="text">{{item.sgdw}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">工地地址：</p>
+                      <p class="text">{{item.factory_addr}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">工地联系人：</p>
+                      <p class="text">{{item.factory_link_name}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">联系电话：</p>
+                      <p class="text">{{item.factory_link_phone}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">计划开盘时间：</p>
+                      <p class="text">{{item.scheduled_open}}</p>
+                    </div>
+                    <div class="item">
+                      <p class="name">实际开盘时间：</p>
+                      <p class="text">{{item.actual_open}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="info__list">
+                  <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="车辆排队" name="first">
+                      <el-table :data="cars" border style="width: 100%;" max-height="400">
+                        <el-table-column width="40" property="row" :show-overflow-tooltip="true" label="排号" align="center"></el-table-column>
+                        <el-table-column min-width="100" class-name="card2" property="busNumber" :show-overflow-tooltip="true" label="车牌号" align="center"></el-table-column>
+                        <el-table-column min-width="60" class-name="card3" property="deadweight" :show-overflow-tooltip="true" label="载重" align="center"></el-table-column>
+                        <el-table-column min-width="100" class-name="card4" label="操作" align="center">
+                          <template slot-scope="scope">
+                            <i class="el-icon-top iconbg bggary" v-if="scope.row.row === 1"></i>
+                            <i class="el-icon-top iconbg" @click="handleUp(scope.row)" v-else></i>
+                            <i class="el-icon-bottom iconbg bgblue" @click="handleDown(scope.row)"></i>
+                            <i class="el-icon-edit-outline iconbg bgyellow" @click="handleEdit(scope.row)"></i>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                    <el-tab-pane label="发货明细" name="second">
+                      <el-table :data="fahuoData" border style="width: 100%;" max-height="400">
+                        <el-table-column width="40" property="row" :show-overflow-tooltip="true" label="排号" align="center"></el-table-column>
+                        <el-table-column min-width="60" property="bus_number" :show-overflow-tooltip="true" label="车牌号" align="center"></el-table-column>
+                        <el-table-column min-width="60" property="concrete_name" :show-overflow-tooltip="true" label="砼类型" align="center"></el-table-column>
+                        <el-table-column width="60" property="print_net_weight" :show-overflow-tooltip="true" label="发货量" align="center"></el-table-column>
+                        <el-table-column width="60" property="" :show-overflow-tooltip="true" label="出厂时间" align="center"></el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                  </el-tabs>
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </el-main>
+      </el-container>
+      <!--table dialog begin-->
+      <el-dialog title="待供任务单列表" :visible.sync="dialogTableVisible" width="80%" @closed="dialogClose">
+        <el-row class="table__option dialog__table">
+          <el-col :span="10">
+            <el-date-picker class="picker" v-model="dialogtimes" value-format="yyyy-MM-DD" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期">
+            </el-date-picker>
+          </el-col>
+          <el-col :span="4">
+            <el-input v-model="dialogKeyWords" placeholder="请输入内容"></el-input>
+          </el-col>
+          <el-col :span="10">
+            <el-button type="success" round @click="searchDialogData">搜索</el-button>
+            <el-button type="primary" round @click="zzTask">转正供任务单</el-button>
+          </el-col>
+        </el-row>
+        <el-table :data="gridData" @selection-change="handleSelectionChange">
+          <el-table-column type="selection" width="50"></el-table-column>
+          <el-table-column min-width="100" property="task_no" label="任务单号" align="center"></el-table-column>
+          <el-table-column min-width="100" property="engineer_name" label="工程名称" align="center"></el-table-column>
+          <el-table-column width="60" property="sgdw" label="施工单位" align="center"></el-table-column>
+          <el-table-column width="60" property="concrete_name" label="硂类型" align="center"></el-table-column>
+          <el-table-column width="60" property="zqdl" label="签订量" align="center"></el-table-column>
+          <el-table-column width="60" property="plan_amount" label="计划量" align="center"></el-table-column>
+          <el-table-column width="60" property="transport_way" label="运输方式" align="center"></el-table-column>
+          <el-table-column width="60" property="temperature" label="出厂温度" align="center"></el-table-column>
+          <el-table-column min-width="60" property="scheduled_open" label="计划开盘时间" width="120px" align="center"> </el-table-column>
+        </el-table>
+      </el-dialog>
+      <el-dialog title="生产级配调查看" :visible.sync="dialogTableVisible1" width="80%" @closed="dialogCloseF" class="dispatch">
+        <div class="box">
+          <el-row>
+            <el-col :span="12">级配编号:<span>{{dispatchData.jpbh}}</span></el-col>
+            <el-col :span="12">混合科类型:<span>{{dispatchData.hhklx}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">沥青标号:<span>{{dispatchData.lqbh}}</span></el-col>
+            <el-col :span="12">区间温度:<span>{{dispatchData.qjwd}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">班次:<span>{{dispatchData.bc}}</span></el-col>
+            <el-col :span="12">天气:<span>{{dispatchData.tq}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">石料加热温度(℃):<span>{{dispatchData.sljrwd}}</span></el-col>
+            <el-col :span="12">产品出厂温度(℃):<span>{{dispatchData.cpccwd}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">机号:<span>{{dispatchData.jh}}</span></el-col>
+            <el-col :span="12">沥青加热温度(℃):<span>{{dispatchData.lqjrwd}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">日期:<span>{{dispatchData.rq}}</span></el-col>
+            <el-col :span="12">干拌时间(s):<span>{{dispatchData.gbsj}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">混拌时间(s):<span>{{dispatchData.sbsj}}</span></el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">备注:<span>{{dispatchData.bz}}</span></el-col>
+          </el-row>
+          <el-row class="table">
+            <el-col :span="12">
+              原材料配比
+              <el-table :data="dispatchData.llcpb" border>
+                <el-table-column property="llcgg" :show-overflow-tooltip="true" label="冷料仓" align="center"></el-table-column>
+                <el-table-column property="yclcs" :show-overflow-tooltip="true" label="原材料厂商" align="center"></el-table-column>
+                <el-table-column property="yclgg" :show-overflow-tooltip="true" label="原材料规格" align="center"></el-table-column>
+                <el-table-column property="zl" :show-overflow-tooltip="true" label="重量(kg)" align="center"></el-table-column>
+                <el-table-column property="" :show-overflow-tooltip="true" label="备注" align="center"></el-table-column>
+              </el-table>
+            </el-col>
+            <el-col :span="12">
+              热料仓配比
+              <el-table :data="dispatchData.rlcpb" border>
+                <el-table-column property="rlc" :show-overflow-tooltip="true" label="热料仓规格" align="center"></el-table-column>
+                <el-table-column property="zl" :show-overflow-tooltip="true" label="重量(kg)" align="center"></el-table-column>
+                <el-table-column property="" :show-overflow-tooltip="true" label="备注" align="center"></el-table-column>
+              </el-table>
+            </el-col>
+          </el-row>
+        </div>
+      </el-dialog>
+      <!--table dialog end-->
+      <audio id="audioOne" controls="controls" muted hidden="true">
+        <source src="./1.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audioTwo" controls="controls" muted hidden="true">
+        <source src="./2.mp3" type="audio/mpeg" />
+      </audio>
     </div>
+    <script src="./plugin/g2/g2.min.js"></script>
     <script src="./plugin/vue.js"></script>
     <script src="./plugin/axios.min.js"></script>
     <script src="./plugin/element/index.js"></script>
     <script src="./js/init.js"></script>
-</body>
-
+  </body>
 </html>
